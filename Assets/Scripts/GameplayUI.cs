@@ -18,6 +18,11 @@ public class GameplayUI : MonoBehaviour {
     public TextMeshProUGUI p1CoinsText;
     public TextMeshProUGUI p2CoinsText;
 
+    public GameObject GameplayUIC;
+    public GameObject WinUI;
+    public GameObject p1WinText;
+    public GameObject p2WinText;
+
     void Awake() {
         if(Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -30,6 +35,8 @@ public class GameplayUI : MonoBehaviour {
     }
 
     void Start() {
+        WinUI.SetActive(false);
+
         coins[0] = 0;
         coins[1] = 0;
     }
@@ -68,7 +75,7 @@ public class GameplayUI : MonoBehaviour {
         UpdateScoreImages();
 
         StartCoroutine(RestartScene());
-    }  
+    }
 
     private void UpdateScoreImages() {
         int p1Points = 0;
@@ -91,8 +98,16 @@ public class GameplayUI : MonoBehaviour {
         
         // para o tempo caso alguém vença
         if(p1Points == 2) {
+            WinUI.SetActive(true);
+            GameplayUIC.SetActive(false);
+            p2WinText.SetActive(false);
+
             Time.timeScale = 0f;
         } else if (p2Points == 2) {
+            WinUI.SetActive(true);
+            GameplayUIC.SetActive(false);
+            p1WinText.SetActive(false);
+
             Time.timeScale = 0f;
         }
     }
@@ -106,6 +121,12 @@ public class GameplayUI : MonoBehaviour {
     private void UpdateCoinText() {
         p1CoinsText.text = $"MOEDAS: 0{coins[0]}";
         p2CoinsText.text = $"MOEDAS: 0{coins[1]}";
+    }
+
+    public void GoToMainMenu(string cena) {
+        Destroy(gameObject);
+        Time.timeScale = 1f;
+        GameManager.Instance?.mudarCena(cena);
     }
 
     IEnumerator RestartScene() {

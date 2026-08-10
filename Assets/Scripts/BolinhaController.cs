@@ -48,8 +48,8 @@ public class BolinhaController : MonoBehaviour {
         meshRenderer = GetComponent<MeshRenderer>();
 
         playerSprite = bolinhaData.sprite;
-        Texture2D spriteTexture = playerSprite.texture;
         
+        Texture2D spriteTexture = playerSprite.texture;
         meshRenderer.material.mainTexture = spriteTexture;
     }
 
@@ -85,6 +85,9 @@ public class BolinhaController : MonoBehaviour {
 
     private void StopMovement(int playerId) {
         mvspd = 0;
+        maxSpeed = 0;
+
+        rb.constraints = RigidbodyConstraints.FreezeAll; 
         rb.linearVelocity = new Vector3(0f, 0f, 0f);
     }
 
