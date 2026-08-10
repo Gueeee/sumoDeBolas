@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85aca041b6b665438597fb25c836e17, type: 3}
+  m_Name: Bolinha3-1
+  m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
+  sprite: {fileID: 21300000, guid: 79d200744a8e663468c2261df5614e36, type: 3}
+  speed: 5
+  pushStrength: 10
