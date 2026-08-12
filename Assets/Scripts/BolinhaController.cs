@@ -46,6 +46,7 @@ public class BolinhaController : MonoBehaviour {
         }
         
         maxSpeed = bolinhaData.speed;
+        mvspd = maxSpeed/4;
         maxPushStrength = bolinhaData.pushStrength;
         meshRenderer = GetComponent<MeshRenderer>();
 
