@@ -11,6 +11,8 @@ public class BolinhaController : MonoBehaviour {
     public float maxSpeed;
     public float pushStrength = 0f;
     public float maxPushStrength = 20f;
+
+    public GameObject otherBolinha;
     private Vector2 _moveDir;
 
     public int playerId = 0;
@@ -163,8 +165,22 @@ public class BolinhaController : MonoBehaviour {
     }
 
     IEnumerator OnAttack() {
-        Debug.Log("Ataque!");
-        pushStrength = maxPushStrength+((maxPushStrength*0.025f)*coins);
+        Rigidbody _rb = otherBolinha.GetComponent<Rigidbody>();
+
+        if (_rb != null) {
+            Vector3 pushDirection = _rb.position - transform.position;
+            pushDirection.y = 0;
+            
+            float _distanceBetween = Math.Abs(pushDirection.x+pushDirection.z);
+            Debug.Log(_distanceBetween);
+
+            pushDirection = pushDirection.normalized;
+
+            pushStrength = maxPushStrength/(_distanceBetween*2)+((maxPushStrength*0.025f)*coins);
+            _rb.AddForce(pushDirection * pushStrength, ForceMode.Impulse);
+        }
+
+        // pushStrength = maxPushStrength+((maxPushStrength*0.025f)*coins);
 
         yield return new WaitForSeconds(.5f);
 
