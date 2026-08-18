@@ -11,6 +11,8 @@ public class BolinhaController : MonoBehaviour {
     public float maxSpeed;
     public float pushStrength = 0f;
     public float maxPushStrength = 20f;
+    public float pushCooldown = 3f;
+    private float actualCooldown = 0f;
 
     public GameObject otherBolinha;
     private Vector2 _moveDir;
@@ -102,6 +104,8 @@ public class BolinhaController : MonoBehaviour {
 
     void Update() {
         _moveDir = move.ReadValue<Vector2>();
+
+        if(actualCooldown > 0) actualCooldown -= Time.deltaTime;
     }
 
     private void FixedUpdate() {
@@ -111,7 +115,8 @@ public class BolinhaController : MonoBehaviour {
     }
 
     private void AttackAction() {
-        StartCoroutine(OnAttack());
+        if(actualCooldown <= 0f) { StartCoroutine(OnAttack()); }
+        else Debug.Log("Cooldown!");
     }
 
     public void Movement() {
@@ -186,5 +191,6 @@ public class BolinhaController : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
 
         pushStrength = 0;
+        actualCooldown = pushCooldown;
     }
 }
