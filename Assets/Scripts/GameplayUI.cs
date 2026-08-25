@@ -23,6 +23,12 @@ public class GameplayUI : MonoBehaviour {
     public GameObject p1WinText;
     public GameObject p2WinText;
 
+    public GameObject p1CooldownComponent;
+    public GameObject p2CooldownComponent;
+
+    public float p1Cooldown = 0f;
+    public float p2Cooldown = 0f;
+
     void Awake() {
         if(Instance != null && Instance != this) {
             Destroy(gameObject);
