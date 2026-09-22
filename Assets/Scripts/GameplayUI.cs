@@ -23,11 +23,8 @@ public class GameplayUI : MonoBehaviour {
     public GameObject p1WinText;
     public GameObject p2WinText;
 
-    public GameObject p1CooldownComponent;
-    public GameObject p2CooldownComponent;
-
-    public float p1Cooldown = 0f;
-    public float p2Cooldown = 0f;
+    public Image p1CooldownComponent;
+    public Image p2CooldownComponent;
 
     void Awake() {
         if(Instance != null && Instance != this) {
@@ -52,6 +49,7 @@ public class GameplayUI : MonoBehaviour {
 
         BolinhaController.OnCoinCollect += UpdateCoin;
         BolinhaController.OnDefeat += UpdateScore;
+        BolinhaController.OnCooldown += UpdateCooldown;
     }
 
     void OnDisable() {
@@ -59,6 +57,7 @@ public class GameplayUI : MonoBehaviour {
 
         BolinhaController.OnCoinCollect -= UpdateCoin;
         BolinhaController.OnDefeat -= UpdateScore;
+        BolinhaController.OnCooldown -= UpdateCooldown;
     }
 
     private void UpdatePortrait(int playerId, Sprite _sprite) {
@@ -81,6 +80,14 @@ public class GameplayUI : MonoBehaviour {
         UpdateScoreImages();
 
         StartCoroutine(RestartScene());
+    }
+
+    private void UpdateCooldown(int playerId, float cooldown) {
+        if(playerId == 0) {
+            p1CooldownComponent.fillAmount = cooldown/3f;
+        } else {
+            p2CooldownComponent.fillAmount = cooldown/3f;
+        }
     }
 
     private void UpdateScoreImages() {

@@ -28,6 +28,7 @@ public class BolinhaController : MonoBehaviour {
     private InputAction attack;
 
     public static event Action<int, Sprite> OnUpdatePortrait;
+    public static event Action<int, float> OnCooldown;
     public static event Action<int, int> OnCoinCollect;
     public static event Action<int> OnDefeat;
 
@@ -105,7 +106,10 @@ public class BolinhaController : MonoBehaviour {
     void Update() {
         _moveDir = move.ReadValue<Vector2>();
 
-        if(actualCooldown > 0) actualCooldown -= Time.deltaTime;
+        if(actualCooldown < pushCooldown) {
+            OnCooldown?.Invoke(playerId, actualCooldown);
+            actualCooldown += Time.deltaTime;
+        }
     }
 
     private void FixedUpdate() {
@@ -115,7 +119,7 @@ public class BolinhaController : MonoBehaviour {
     }
 
     private void AttackAction() {
-        if(actualCooldown <= 0f) { StartCoroutine(OnAttack()); }
+        if(actualCooldown >= pushCooldown) { StartCoroutine(OnAttack()); }
         else Debug.Log("Cooldown!");
     }
 
@@ -191,6 +195,7 @@ public class BolinhaController : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
 
         pushStrength = 0;
-        actualCooldown = pushCooldown;
+        actualCooldown = 0f;
+        OnCooldown?.Invoke(playerId, actualCooldown);
     }
 }

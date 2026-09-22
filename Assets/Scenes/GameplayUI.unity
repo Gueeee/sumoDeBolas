@@ -1642,11 +1642,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: b2fce3e0f5f8f0f44af126f0dcc6466e, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1930,6 +1930,8 @@ MonoBehaviour:
   WinUI: {fileID: 1028497498}
   p1WinText: {fileID: 637497263}
   p2WinText: {fileID: 1726132954}
+  p1CooldownComponent: {fileID: 1186152590}
+  p2CooldownComponent: {fileID: 1588674724}
 --- !u!1 &1400235301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2137,14 +2139,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: b2fce3e0f5f8f0f44af126f0dcc6466e, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1588674725
