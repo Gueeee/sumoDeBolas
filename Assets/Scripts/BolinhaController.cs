@@ -175,6 +175,9 @@ public class BolinhaController : MonoBehaviour {
     }
 
     IEnumerator OnAttack() {
+        OnCooldown?.Invoke(playerId, actualCooldown);
+        actualCooldown = 0f;
+
         Rigidbody _rb = otherBolinha.GetComponent<Rigidbody>();
 
         if (_rb != null) {
@@ -195,7 +198,5 @@ public class BolinhaController : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
 
         pushStrength = 0;
-        actualCooldown = 0f;
-        OnCooldown?.Invoke(playerId, actualCooldown);
     }
 }
